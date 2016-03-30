@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
     @group = Group.create(group_params)
 
     if @group.save
-      redirect_to groups_path
+      redirect_to groups_path, notice: "You create a new topic!"
     else
       render :new
     end
@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     if @group.update(group_params)
-      redirect_to groups_path, notice: "Update success "
+      redirect_to groups_path, notice: "Update success!"
     else
       render :edit
     end
@@ -38,7 +38,7 @@ class GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
-    redirect_to groups_path, alert: "Deleted"
+    redirect_to groups_path, alert: "Deleted!"
   end
 
   private
