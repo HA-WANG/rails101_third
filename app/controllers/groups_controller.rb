@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
     @group = current_user.groups.new(group_params)
 
     if @group.save
+      current_user.join!(@group)
       redirect_to groups_path, notice: "You create a new topic!"
     else
       render :new
@@ -42,6 +43,32 @@ class GroupsController < ApplicationController
     @group = current_user.groups.find(params[:id])
     @group.destroy
     redirect_to groups_path, alert: "Deleted!"
+  end
+
+  def join
+    @group = Group.find(params[:id])
+
+    if !current_user.is_member_of?(@group)
+      current_user.join!(@group)
+      flash[:notice] = "Join successful!"
+    else
+      flash[:warning] = "你已經是本討論版成員了！"
+    end
+
+    redirect_to group_path(@group)
+  end
+
+  def quit
+    @group = Group.find(params[:id])
+
+    if current_user.is_member_of?(@group)
+      current_user.quit!(@group)
+      flash[:alert] = "Quit this group!"
+    else
+      flash[:warning] = "你不是本討論版成員，怎麼退出 XD"
+    end
+
+    redirect_to group_path(@group)
   end
 
   private
