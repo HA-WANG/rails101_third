@@ -4,6 +4,9 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem "devise", "~> 3.4.1"
 gem 'faker', '1.6.3'
+gem 'will_paginate', '3.1.0'
+gem 'will_paginate-bootstrap', '1.0.1'
+gem 'ransack', '1.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

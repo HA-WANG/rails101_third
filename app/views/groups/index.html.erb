@@ -2,6 +2,22 @@
   <div class="group">
     <%= link_to("New group", new_group_path, class: "btn btn-primary pull-right") %>
   </div>
+
+  <div>
+    <%= search_form_for @search do |f| %>
+    <div class="form-group">
+      <%= f.label :title_cont, "Title contains" %>
+      <%= f.text_field :title_cont %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description_cont, "Description contains" %>
+      <%= f.text_field :description_cont %>
+    </div>
+    <div class="actions"><%= f.submit "Search", class: "btn btn-warning btn-xs" %></div>
+    <% end %>
+  </div>
+
+  <%= will_paginate @groups, renderer: BootstrapPagination::Rails %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -27,4 +43,5 @@
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate @groups, renderer: BootstrapPagination::Rails %>
 </div>

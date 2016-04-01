@@ -2,7 +2,11 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
 
   def index
-    @groups = Group.all
+    #@groups = Group.all
+    @groups = Group.paginate(:page => params[:page], :per_page => 15)
+
+    @search = Group.search(params[:q])
+    @groups = @search.result.paginate(:page => params[:page], :per_page => 15)
   end
 
   def new
